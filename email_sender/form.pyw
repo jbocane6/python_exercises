@@ -1,5 +1,5 @@
 # !/usr/bin/python3
-from tkinter import *
+from tkinter import Tk, messagebox, END, Label, Entry, Text, Button
 from functools import partial
 import sender as s
 
@@ -7,12 +7,16 @@ import sender as s
 def send(receiverField, subjectField, bodyMessageField):
     if receiverField.get() == "":
         print("Please insert receiver mail")
-    elif subjectField.get() == "" or bodyMessageField.get() == "":
+    elif subjectField.get() == "" or bodyMessageField.get("1.0", END) == "":
         print("Please fill fields to send mail")
     else:
         s.send(receiverField.get(), subjectField.get(),
-                bodyMessageField.get()
-        )
+               bodyMessageField.get("1.0", END))
+        receiverField.delete(0, END)
+        subjectField.delete(0, END)
+        bodyMessageField.delete("1.0", END)
+        messagebox.showinfo("Success", "Message sent")
+
 
 def main():
     # create a GUI window
@@ -25,7 +29,7 @@ def main():
     root.title("Email sender")
 
     # set the configuration of GUI window
-    root.geometry("500x350")
+    root.geometry("500x300")
 
     # create a Form label
     heading = Label(root, text="Email sender", bg="light gray")
@@ -61,12 +65,14 @@ def main():
     bodyMessageField.grid(row=4, column=1)
 
     # create a Submit Button and place into the root window
-    submit = Button(root, text="Submit", fg="Black",
-                    bg="Grey", command=partial(send, receiverField, subjectField, bodyMessageField))
+    submit = Button(root, text="Submit", fg="Black", bg="Grey",
+                    command=partial(send, receiverField, subjectField,
+                                    bodyMessageField))
     submit.grid(row=8, column=1)
 
     # start the GUI
     root.mainloop()
+
 
 if __name__ == "__main__":
     main()
