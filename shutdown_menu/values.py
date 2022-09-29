@@ -25,6 +25,8 @@ def opbutton(root, option, icon):
     return ttk.Button(
         root,
         image=icon,
+        text=option,
+        compound=tk.TOP,
         command=partial(clicked, option)
     )
 
