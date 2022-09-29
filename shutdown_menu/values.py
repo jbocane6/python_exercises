@@ -8,6 +8,7 @@ from tkinter import ttk
 wwdw = 250
 hwdw = 100
 
+
 # click method
 def clicked(op: str):
     command = "shutdown "
@@ -20,6 +21,7 @@ def clicked(op: str):
     os.system(command)
     exit()
 
+
 # set tkinter button options
 def opbutton(root, option, icon):
     return ttk.Button(
@@ -30,6 +32,7 @@ def opbutton(root, option, icon):
         command=partial(clicked, option)
     )
 
+
 # button details
 def pack(button):
     return button.pack(
@@ -37,6 +40,7 @@ def pack(button):
         ipady=5,
         side='left'
     )
+
 
 # set icon
 def icon(op: str):

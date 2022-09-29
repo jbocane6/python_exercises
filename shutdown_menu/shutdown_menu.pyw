@@ -3,6 +3,7 @@ import values as v
 from logging import shutdown
 import tkinter as tk
 
+
 def main():
     # root window
     root = tk.Tk()
@@ -38,9 +39,10 @@ def main():
 
     # center window
     root.geometry(str(v.wwdw) + "x" + str(v.hwdw) + "+" + str(pwidth) + "+" +
-                str(pheight))
+                  str(pheight))
 
     root.mainloop()
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()
