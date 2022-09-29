@@ -1,17 +1,33 @@
 # !/usr/bin/python3
 from tkinter import Tk, messagebox, END, Label, Entry, Text, Button
+from email_validator import validate_email, EmailNotValidError
 from functools import partial
 import sender as s
 
 
+def validate(lst):
+    for mail in lst:
+        try:
+            # Check that the email address is valid.
+            validation = validate_email(mail, check_deliverability=True)
+        except EmailNotValidError:
+            # Email is not valid.
+            return False
+    return True
+
+
+# Validates all fields are filled and send args to send mail
 def send(receiverField, subjectField, bodyMessageField):
-    if receiverField.get() == "":
-        print("Please insert receiver mail")
+    receivers = receiverField.get()
+    lst = receivers.split(',')
+    if receivers == "":
+        messagebox.showinfo("Error", "Please insert receiver mail")
+    elif not validate(lst):
+        messagebox.showinfo("Error", "Verify email format")
     elif subjectField.get() == "" or bodyMessageField.get("1.0", END) == "":
-        print("Please fill fields to send mail")
+        messagebox.showinfo("Error", "Please fill fields to send mail")
     else:
-        s.send(receiverField.get(), subjectField.get(),
-               bodyMessageField.get("1.0", END))
+        s.sendmail(lst, subjectField.get(), bodyMessageField.get("1.0", END))
         receiverField.delete(0, END)
         subjectField.delete(0, END)
         bodyMessageField.delete("1.0", END)
@@ -19,47 +35,29 @@ def send(receiverField, subjectField, bodyMessageField):
 
 
 def main():
-    # create a GUI window
     root = Tk()
-
-    # set the background colour of GUI window
     root.configure(background='light gray')
-
-    # set the title of GUI window
     root.title("Email sender")
-
-    # set the configuration of GUI window
     root.geometry("500x300")
 
-    # create a Form label
+    # Labels
     heading = Label(root, text="Email sender", bg="light gray")
-
-    # create a Name label
     receiver = Label(root, text="CC", bg="light gray")
-
-    # create a Course label
     subject = Label(root, text="Subject", bg="light gray")
-
-    # create a Semester label
     bodyMessage = Label(root, text="Message", bg="light gray")
 
-    # grid method is used for placing
-    # the widgets at respective positions
-    # in table like structure .
+    # Align labels
     heading.grid(row=0, column=1)
     receiver.grid(row=1, column=0)
     subject.grid(row=2, column=0)
     bodyMessage.grid(row=3, column=1)
 
-    # create a text entry box
-    # for typing the information
+    # Entry boxes for typing the information
     receiverField = Entry(root)
     subjectField = Entry(root)
     bodyMessageField = Text(root, height=10, width=50)
 
-    # grid method is used for placing
-    # the widgets at respective positions
-    # in table like structure .
+    # Align fields
     receiverField.grid(row=1, column=1, ipadx="100")
     subjectField.grid(row=2, column=1, ipadx="100")
     bodyMessageField.grid(row=4, column=1)
