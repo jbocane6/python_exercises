@@ -17,9 +17,8 @@ class TestMissingNumber(unittest.TestCase):
     def testRandom(self):
         for n in [100, 253, 5235, 800000, 3, 15416154]:
             miss = random.randrange(1, n)
-            list = [x for x in range(1, n+1)]
-            self.assertEqual(m.missing_number([y for y in list if y != miss]),
-                             f"The missing number is: {miss}")
+            self.assertEqual(m.missing_number([y for y in [x for x in range(
+                1, n+1)] if y != miss]), f"The missing number is: {miss}")
 
     # check if contains bool value inside list.
     def testBool(self):
