@@ -13,3 +13,4 @@ Several different python exercises.
 - [Email sender](https://github.com/jbocane6/python_exercises/tree/master/email_sender)
 - [Array questions](https://github.com/jbocane6/python_exercises/tree/master/array_questions)
 - [Prime numbers](https://github.com/jbocane6/python_exercises/tree/master/prime_numbers)
+- [Clocks](https://github.com/jbocane6/python_exercises/tree/master/clocks)
