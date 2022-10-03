@@ -12,3 +12,4 @@ Several different python exercises.
 - [Shutdown menu](https://github.com/jbocane6/python_exercises/tree/master/shutdown_menu)
 - [Email sender](https://github.com/jbocane6/python_exercises/tree/master/email_sender)
 - [Array questions](https://github.com/jbocane6/python_exercises/tree/master/array_questions)
+- [Prime numbers](https://github.com/jbocane6/python_exercises/tree/master/prime_numbers)
